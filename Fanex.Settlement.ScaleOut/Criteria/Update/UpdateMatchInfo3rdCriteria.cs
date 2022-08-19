@@ -1,0 +1,23 @@
+﻿using Fanex.Data.Repository;
+
+namespace Fanex.Settlement.ScaleOut.Criteria.HappyFive
+{
+    internal class UpdateMatchInfo3rdCriteria : NonQueryCommand
+    {
+        public int MatchId { get; set; }
+
+        public int creator { get; set; }
+
+        public string Command { get; set; }
+
+        public string Action { get; set; }
+
+        public int FTHome { get; set; }
+
+        public int FTAway { get; set; }
+
+        public override string GetSettingKey() => "NAP_Admin_Match_Update";
+
+        public override bool IsValid() => MatchId > 0;
+    }
+}

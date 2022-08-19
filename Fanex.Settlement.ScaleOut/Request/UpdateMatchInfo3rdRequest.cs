@@ -1,0 +1,17 @@
+﻿namespace Fanex.Settlement.ScaleOut.Request
+{
+    public class UpdateMatchInfo3rdRequest
+    {
+        public int MatchId { get; set; }
+
+        public int creator { get; set; }
+
+        public string Command { get; set; }
+
+        public string Action { get; set; }
+
+        public int? FTHome { get; set; }
+
+        public int? FTAway { get; set; }
+    }
+}

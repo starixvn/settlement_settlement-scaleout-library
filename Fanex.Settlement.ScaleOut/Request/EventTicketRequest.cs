@@ -21,5 +21,9 @@
         public int InstantKey { get; set; }
 
         public int SettleAbandonedMatchIBCParlay { get; set; }
+
+        public int DestinationMatchId { get; set; }
+
+        public bool IsAutoRefund { get; set; }
     }
 }

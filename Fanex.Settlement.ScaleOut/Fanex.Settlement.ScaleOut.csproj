@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <IsPublishable>True</IsPublishable>
+    <Version>1.0.5</Version>
+    <Authors>Levi.vu, Kaden.Trinh</Authors>
+    <Product>Settlement</Product>
+    <Description>Provide some common methods run on Multi-Server</Description>
+    <PackageProjectUrl>https://gitlab.nexdev.net/settlement/settlement-scaleout-library</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>

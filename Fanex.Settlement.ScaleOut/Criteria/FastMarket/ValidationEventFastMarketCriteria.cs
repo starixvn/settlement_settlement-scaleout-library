@@ -1,10 +1,8 @@
-﻿using System;
-using Fanex.Data;
-using Fanex.Data.Repository;
+﻿using Fanex.Data.Repository;
 
-namespace Fanex.Settlement.ScaleOut.Criteria
+namespace Fanex.Settlement.ScaleOut.Criteria.FastMarket
 {
-    public class ValidationTicketFastMarketCriteria : NonQueryCommand
+    public class ValidationEventFastMarketCriteria : NonQueryCommand
     {
         public int MatchId { get; set; }
 
@@ -14,18 +12,13 @@ namespace Fanex.Settlement.ScaleOut.Criteria
 
         public string SelectedResources { get; set; }
 
-        public bool IsSettleDetermined { get; set; }
-
-        [SpParam(Ignored = true)]
-        public string DbServer { get; set; }
-
         public int ErrCode { get; set; }
 
         public string ErrMsg { get; set; }
 
         public override string GetSettingKey()
         {
-            return $"NAP_Admin_Settlement_ValidationFM_Ticket_{DbServer}";
+            return "NAP_Admin_Settlement_ValidationFM_Event";
         }
 
         public override bool IsValid() => MatchId > 0;

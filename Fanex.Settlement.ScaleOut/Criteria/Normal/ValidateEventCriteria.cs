@@ -1,12 +1,10 @@
 ﻿using Fanex.Data.Repository;
 
-namespace Fanex.Settlement.ScaleOut.Criteria
+namespace Fanex.Settlement.ScaleOut.Criteria.Normal
 {
-    public class ValidateEventThirdPartyCriteria : NonQueryCommand
+    public class ValidateEventCriteria : NonQueryCommand
     {
         public int MatchId { get; set; }
-
-        public int VendorId { get; set; }
 
         public string Action { get; set; }
 
@@ -18,11 +16,19 @@ namespace Fanex.Settlement.ScaleOut.Criteria
 
         public string SpName { get; set; }
 
+        public int SDTRecord { get; set; }
+
+        public int SettleAbandonedMatchIBCParlay { get; set; }
+
+        public int DestinationMatchId { get; set; }
+
+        public bool IsAutoRefund { get; set; }
+
         public int ErrCode { get; set; }
 
         public string ErrMsg { get; set; }
 
-        public override string GetSettingKey() => "NAP_Admin_Settlement_3rdValidation_Event";
+        public override string GetSettingKey() => "NAP_Admin_Settlement_Validation_Event";
 
         public override bool IsValid() => MatchId > 0;
     }

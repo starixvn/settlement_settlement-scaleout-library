@@ -1,7 +1,7 @@
 ﻿using Fanex.Data;
 using Fanex.Data.Repository;
 
-namespace Fanex.Settlement.ScaleOut.Criteria
+namespace Fanex.Settlement.ScaleOut.Criteria.Normal
 {
     public class ValidateTicketCriteria : NonQueryCommand
     {
@@ -11,7 +11,7 @@ namespace Fanex.Settlement.ScaleOut.Criteria
 
         public string Mode { get; set; }
 
-        public bool IsAuto { get; set; } 
+        public bool IsAuto { get; set; }
 
         public string SelectedResources { get; set; }
 
@@ -24,6 +24,8 @@ namespace Fanex.Settlement.ScaleOut.Criteria
         public int InstantKey { get; set; }
 
         public int SettleAbandonedMatchIBCParlay { get; set; }
+
+        public int DestinationMatchId { get; set; }
 
         public int ErrCode { get; set; }
 

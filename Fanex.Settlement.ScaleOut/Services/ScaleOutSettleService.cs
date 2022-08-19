@@ -5,6 +5,9 @@ using AutoMapper;
 using Fanex.Data.Repository;
 using Fanex.Settlement.ScaleOut.Constants;
 using Fanex.Settlement.ScaleOut.Criteria;
+using Fanex.Settlement.ScaleOut.Criteria.FastMarket;
+using Fanex.Settlement.ScaleOut.Criteria.Normal;
+using Fanex.Settlement.ScaleOut.Criteria.Update;
 using Fanex.Settlement.ScaleOut.Models;
 using Fanex.Settlement.ScaleOut.Request;
 using Microsoft.AspNetCore.Http;
@@ -25,7 +28,6 @@ namespace Fanex.Settlement.ScaleOut.Services
         Task<ResultMessage> ValidateEventAndTicketFastMarket(EventTicketFastMarketRequest request);
 
         Task<int> GetSiteGroupId(string dbServer);
-
     }
 
     public class ScaleOutSettleServiceImp : ScaleOutSettleService
@@ -52,12 +54,12 @@ namespace Fanex.Settlement.ScaleOut.Services
 
         public async Task UpdateAutoRefundChildMatch(RefundChildMatchRequest request)
         {
-            var leagueGroupIds= new int[] { 42, 74, 108 };
+            var leagueGroupIds = new int[] { 42, 74, 108 };
             var isCalcAll = string.Equals(request.ActionName, ActionName.CalculateFullTime) ||
                             string.Equals(request.ActionName, ActionName.CalculateAll);
 
-            if (DifferentFinalScore(request.HomeValue, request.AwayValue) 
-                && leagueGroupIds.Contains(request.LeagueGroupId)  
+            if (DifferentFinalScore(request.HomeValue, request.AwayValue)
+                && leagueGroupIds.Contains(request.LeagueGroupId)
                 && isCalcAll)
             {
                 var criteria = new UpdateAutoRefundChildMatchCriteria
@@ -92,7 +94,7 @@ namespace Fanex.Settlement.ScaleOut.Services
                 {
                     MatchId = matchId,
                     AdminId = adminId,
-                    Ip = httpContext == null ? string.Empty: httpContext.Connection.RemoteIpAddress.ToString(),
+                    Ip = httpContext == null ? string.Empty : httpContext.Connection.RemoteIpAddress.ToString(),
                     Type = settlementSystem,
                     IsEnabled = actionName != ActionName.Undo
                 };

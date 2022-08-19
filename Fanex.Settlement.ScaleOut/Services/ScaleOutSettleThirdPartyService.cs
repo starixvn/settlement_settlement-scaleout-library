@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Fanex.Data.Repository;
 using Fanex.Settlement.ScaleOut.Criteria;
+using Fanex.Settlement.ScaleOut.Criteria.BetBuilder;
+using Fanex.Settlement.ScaleOut.Criteria.HappyFive;
 using Fanex.Settlement.ScaleOut.Models;
 using Fanex.Settlement.ScaleOut.Request;
 using Microsoft.Extensions.Configuration;
@@ -11,7 +13,11 @@ namespace Fanex.Settlement.ScaleOut.Services
 {
     public interface ScaleOutSettleThirdPartyService
     {
-       Task<ResultMessage> ValidateEventAndTicket3rd(EventTicketThirdPartyRequest request);
+        Task<(ResultMessage, string)> ValidateBetBuilder(BetBuilderRequest request);
+
+        Task<ResultMessage> GetDeploymentInfo(GetDeploymentInfoRequest request);
+
+        Task UpdateMatchInfo3rd(UpdateMatchInfo3rdRequest request);
     }
 
     public class ScaleOutSettleThirdPartyServiceImp : ScaleOutSettleThirdPartyService
@@ -32,29 +38,38 @@ namespace Fanex.Settlement.ScaleOut.Services
             this.mapper = mapper;
         }
 
-        public async Task<ResultMessage> ValidateEventAndTicket3rd(EventTicketThirdPartyRequest request)
+        public async Task<(ResultMessage, string)> ValidateBetBuilder(BetBuilderRequest request)
         {
-            var eventCriteria = mapper.Map<EventTicketThirdPartyRequest, ValidateEventThirdPartyCriteria>(request);
-            var validateEvent = await ValidateEvent(eventCriteria);
+            var eventCriteria = mapper.Map<BetBuilderRequest, ValidateBetBuilderCriteria>(request);
+            await repository.ExecuteAsync(eventCriteria);
 
-            if (validateEvent.ErrorCode > 0)
+            var result = new ResultMessage
             {
-                return validateEvent;
-            }
+                ErrorCode = eventCriteria.ErrCode,
+                ErrorMessage = eventCriteria.ErrMsg
+            };
 
-            var ticketCriteria = mapper.Map<EventTicketThirdPartyRequest, ValidateTicketThirdPartyCriteria>(request);
-            return await ValidateTickets(ticketCriteria);
+            return (result, eventCriteria.InvalidMarketId);
         }
 
-        private async Task<ResultMessage> ValidateTickets(ValidateTicketThirdPartyCriteria criteria)
+        public async Task UpdateMatchInfo3rd(UpdateMatchInfo3rdRequest request)
         {
+            var criteria = mapper.Map<UpdateMatchInfo3rdRequest, UpdateMatchInfo3rdCriteria>(request);
+            await repository.ExecuteAsync(criteria);
+        }
+
+        public async Task<ResultMessage> GetDeploymentInfo(GetDeploymentInfoRequest request)
+        {
+            var criteria = new GetDeploymentInfoCriteria { SpName = request.SPName };
+
             var servers = configuration.GetSection("SiteDbServer").Get<List<string>>();
             foreach (var server in servers)
             {
                 criteria.DbServer = server;
                 await repository.ExecuteAsync(criteria);
-                if (criteria.ErrCode > 0)
+                if (criteria.IsWaiting)
                 {
+                    await Task.Delay(criteria.WaitingTime);
                     return new ResultMessage
                     {
                         ErrorCode = criteria.ErrCode,
@@ -64,18 +79,6 @@ namespace Fanex.Settlement.ScaleOut.Services
             }
 
             return new ResultMessage();
-        }
-
-        private async Task<ResultMessage> ValidateEvent(ValidateEventThirdPartyCriteria criteria)
-        {
-            await repository.ExecuteAsync(criteria);
-
-            return new ResultMessage
-            {
-                ErrorCode = criteria.ErrCode,
-                ErrorMessage = criteria.ErrMsg
-            };
-
         }
     }
 }

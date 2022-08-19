@@ -1,6 +1,6 @@
 ﻿using Fanex.Data.Repository;
 
-namespace Fanex.Settlement.ScaleOut.Criteria
+namespace Fanex.Settlement.ScaleOut.Criteria.Update
 {
     public class UpdateMatchInfoCriteria : NonQueryCommand
     {

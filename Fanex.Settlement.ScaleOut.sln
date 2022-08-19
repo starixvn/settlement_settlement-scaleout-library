@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fanex.Settlement.ScaleOut", "Fanex.Settlement.ScaleOut\Fanex.Settlement.ScaleOut.csproj", "{52E96009-4C12-4A6B-AD39-E20AA0324A99}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52E96009-4C12-4A6B-AD39-E20AA0324A99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52E96009-4C12-4A6B-AD39-E20AA0324A99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52E96009-4C12-4A6B-AD39-E20AA0324A99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52E96009-4C12-4A6B-AD39-E20AA0324A99}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1C77B75B-95D9-4212-ABC6-637414BCACC2}
+	EndGlobalSection
+EndGlobal

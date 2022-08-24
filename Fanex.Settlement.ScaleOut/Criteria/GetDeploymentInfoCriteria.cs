@@ -9,7 +9,7 @@ namespace Fanex.Settlement.ScaleOut.Criteria
 
         public bool IsWaiting { get; set; }
 
-        public int WaitingTime { get; set; }
+        public string WaitingTime { get; set; }
 
         public int ErrCode { get; set; }
 

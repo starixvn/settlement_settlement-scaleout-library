@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Fanex.Settlement.ScaleOut.Criteria.BetBuilder;
 using Fanex.Settlement.ScaleOut.Criteria.FastMarket;
+using Fanex.Settlement.ScaleOut.Criteria.HappyFive;
 using Fanex.Settlement.ScaleOut.Criteria.Normal;
 using Fanex.Settlement.ScaleOut.Criteria.Update;
 using Fanex.Settlement.ScaleOut.Request;
@@ -17,6 +18,7 @@ namespace Fanex.Settlement.ScaleOut
             CreateMap<EventTicketFastMarketRequest, ValidationTicketFastMarketCriteria>();
             CreateMap<UpdateMatchInfoRequest, UpdateMatchInfoCriteria>();
             CreateMap<BetBuilderRequest, ValidateBetBuilderCriteria>();
+            CreateMap<UpdateMatchInfo3rdRequest, UpdateMatchInfo3rdCriteria>();
         }
     }
 }

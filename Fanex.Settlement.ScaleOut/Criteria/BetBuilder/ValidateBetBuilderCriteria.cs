@@ -20,14 +20,8 @@ namespace Fanex.Settlement.ScaleOut.Criteria.BetBuilder
 
         public string InvalidMarketId { get; set; }
 
-        public override string GetSettingKey()
-        {
-            return "NAP_Admin_Settlement_Betbuilder_Validation_Event";
-        }
+        public override string GetSettingKey() => "NAP_Admin_Settlement_Betbuilder_Validation_Event";
 
-        public override bool IsValid()
-        {
-            return MatchId > 0;
-        }
+        public override bool IsValid() => MatchId > 0;
     }
 }

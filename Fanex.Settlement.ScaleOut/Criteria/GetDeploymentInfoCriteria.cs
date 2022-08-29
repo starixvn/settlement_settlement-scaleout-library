@@ -18,14 +18,8 @@ namespace Fanex.Settlement.ScaleOut.Criteria
         [SpParam(Ignored = true)]
         public string DbServer { get; set; }
 
-        public override string GetSettingKey()
-        {
-            return $"NAP_Set_SPDeploymentInfo_{DbServer}";
-        }
+        public override string GetSettingKey() => $"NAP_Set_SPDeploymentInfo_{DbServer}";
 
-        public override bool IsValid()
-        {
-            return !string.IsNullOrEmpty(SpName);
-        }
+        public override bool IsValid() => !string.IsNullOrEmpty(SpName);
     }
 }

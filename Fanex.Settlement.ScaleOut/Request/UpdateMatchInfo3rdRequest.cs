@@ -4,7 +4,7 @@
     {
         public int MatchId { get; set; }
 
-        public int creator { get; set; }
+        public int Creator { get; set; }
 
         public string Command { get; set; }
 

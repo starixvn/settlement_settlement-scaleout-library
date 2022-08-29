@@ -8,10 +8,7 @@ namespace Fanex.Settlement.ScaleOut.Criteria
         [SpParam(Ignored = true)]
         public string DbServer { get; set; }
 
-        public override string GetSettingKey()
-        {
-            return $"Get_SiteDBGroupID_{DbServer}";
-        }
+        public override string GetSettingKey() => $"Get_SiteDBGroupID_{DbServer}";
 
         public override bool IsValid() => true;
     }

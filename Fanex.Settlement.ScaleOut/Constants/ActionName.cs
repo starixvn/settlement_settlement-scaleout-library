@@ -11,6 +11,5 @@
         public const string Undo = "UNDO";
 
         public const string RefundHalfTime = "REFUND-HT";
-
     }
 }

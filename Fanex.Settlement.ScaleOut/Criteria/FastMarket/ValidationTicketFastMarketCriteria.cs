@@ -23,10 +23,7 @@ namespace Fanex.Settlement.ScaleOut.Criteria.FastMarket
 
         public string ErrMsg { get; set; }
 
-        public override string GetSettingKey()
-        {
-            return $"NAP_Admin_Settlement_ValidationFM_Ticket_{DbServer}";
-        }
+        public override string GetSettingKey() => $"NAP_Admin_Settlement_ValidationFM_Ticket_{DbServer}";
 
         public override bool IsValid() => MatchId > 0;
     }

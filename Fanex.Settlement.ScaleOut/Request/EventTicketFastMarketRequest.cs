@@ -8,7 +8,7 @@
 
         public bool IsAuto { get; set; }
 
-        public string SelectedResources { get; set; }
+        public string Results { get; set; }
 
         public int AutoSetting { get; set; }
 

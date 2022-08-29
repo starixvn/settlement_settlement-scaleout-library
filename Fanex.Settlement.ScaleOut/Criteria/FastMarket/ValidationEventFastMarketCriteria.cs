@@ -10,7 +10,7 @@ namespace Fanex.Settlement.ScaleOut.Criteria.FastMarket
 
         public bool IsAuto { get; set; }
 
-        public string SelectedResources { get; set; }
+        public string Results { get; set; }
 
         public int ErrCode { get; set; }
 

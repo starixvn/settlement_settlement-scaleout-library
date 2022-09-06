@@ -21,5 +21,15 @@
         public const string BetBuilder = "BB";
 
         public const string MixParlay = "MP";
+
+        public const string PinGoal = "pingoal";
+
+        public const string HappyFive = "164";
+
+        public const string BitCoin = "175";
+
+        public const string NumberGame = "161";
+
+        public const string Outright = "outright";
     }
 }

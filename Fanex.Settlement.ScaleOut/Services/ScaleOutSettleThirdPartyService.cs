@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Fanex.Data.Repository;
@@ -68,9 +67,9 @@ namespace Fanex.Settlement.ScaleOut.Services
             {
                 criteria.DbServer = server;
                 await repository.ExecuteAsync(criteria);
-                if (criteria.IsWaiting)
+                
+                if (criteria.ErrCode > 0)
                 {
-                    await Task.Delay((int)TimeSpan.Parse(criteria.WaitingTime).TotalSeconds);
                     return new ResultMessage
                     {
                         ErrorCode = criteria.ErrCode,

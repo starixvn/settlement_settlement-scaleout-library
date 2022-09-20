@@ -40,7 +40,7 @@ namespace Fanex.Settlement.ScaleOut.Criteria.Update
 
         public bool IsSettleDetermined { get; set; }
 
-        public int SDTRecord { get; set; }
+        public int? SDTRecord { get; set; }
 
         public override string GetSettingKey() => "NAP_Admin_MatchInfoUpd";
 

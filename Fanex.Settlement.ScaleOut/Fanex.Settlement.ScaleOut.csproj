@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <IsPublishable>True</IsPublishable>
-    <Version>1.1.6</Version>
+    <Version>1.1.8</Version>
     <Authors>Levi.vu, Kaden.Trinh</Authors>
     <Product>Settlement</Product>
     <Description>Provide some common methods run on Multi-Server</Description>

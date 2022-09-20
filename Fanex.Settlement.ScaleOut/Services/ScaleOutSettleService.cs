@@ -29,8 +29,6 @@ namespace Fanex.Settlement.ScaleOut.Services
         Task<ResultMessage> ValidateEventAndTicketFastMarket(EventTicketFastMarketRequest request);
 
         Task<int> GetSiteGroupId(string dbServer);
-
-        Task<ResultMessage> Excecute(CalculateCriteria criteria);
     }
 
     public class ScaleOutSettleServiceImp : ScaleOutSettleService
@@ -201,50 +199,6 @@ namespace Fanex.Settlement.ScaleOut.Services
             var criteria = new GetSiteGroupCriteria { DbServer = dbServer };
             var site = await repository.GetAsync<SiteGroup>(criteria);
             return site.SiteDbGroupId;
-        }
-
-        public Task<ResultMessage> Excecute(CalculateCriteria criteria)
-        {
-            var listResult = new List<ResultMessage>();
-            var TaskList = new List<Task>();
-            var servers = configuration.GetSection("SiteDbServer").Get<List<string>>();
-            foreach (var server in servers)
-            {
-                TaskList.Add(Settle(criteria, server, listResult));
-            }
-
-            Task.WaitAll(TaskList.ToArray());
-            return Task.FromResult(MergeFailedResult(listResult));
-        }
-
-        private async Task Settle(CalculateCriteria criteria, string server, List<ResultMessage> listResult)
-        {
-            criteria.DbServer = server;
-            await repository.ExecuteAsync(criteria);
-            var result = new ResultMessage
-            {
-                ErrorCode = criteria.ErrCode,
-                ErrorMessage = $"{server}: {criteria.ErrMsg}"
-            };
-
-            if (result.ErrorCode > 0)
-            {
-                listResult.Add(result);
-            }
-        }
-
-        private ResultMessage MergeFailedResult(List<ResultMessage> listResult)
-        {
-            if (listResult.Any())
-            {
-                return new ResultMessage
-                {
-                    ErrorCode = 1000,
-                    ErrorMessage = string.Join(" | ", listResult.Select(x => x.ErrorMessage))
-                };
-            }
-
-            return new ResultMessage();
         }
     }
 }

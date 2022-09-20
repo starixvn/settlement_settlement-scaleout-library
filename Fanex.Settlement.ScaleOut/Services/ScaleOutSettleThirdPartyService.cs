@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Fanex.Data.Repository;
 using Fanex.Settlement.ScaleOut.Criteria;
 using Fanex.Settlement.ScaleOut.Criteria.BetBuilder;
@@ -8,6 +6,8 @@ using Fanex.Settlement.ScaleOut.Criteria.HappyFive;
 using Fanex.Settlement.ScaleOut.Models;
 using Fanex.Settlement.ScaleOut.Request;
 using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Fanex.Settlement.ScaleOut.Services
 {
@@ -18,6 +18,8 @@ namespace Fanex.Settlement.ScaleOut.Services
         Task<ResultMessage> GetDeploymentInfo(GetDeploymentInfoRequest request);
 
         Task UpdateMatchInfo3rd(UpdateMatchInfo3rdRequest request);
+
+        Task<ResultMessage> ValidateMoveBetDay(string matchIds, string eventTable);
     }
 
     public class ScaleOutSettleThirdPartyServiceImp : ScaleOutSettleThirdPartyService
@@ -67,13 +69,35 @@ namespace Fanex.Settlement.ScaleOut.Services
             {
                 criteria.DbServer = server;
                 await repository.ExecuteAsync(criteria);
-                
+
                 if (criteria.ErrCode > 0)
                 {
                     return new ResultMessage
                     {
                         ErrorCode = criteria.ErrCode,
                         ErrorMessage = criteria.ErrMsg
+                    };
+                }
+            }
+
+            return new ResultMessage();
+        }
+
+        public async Task<ResultMessage> ValidateMoveBetDay(string matchIds, string eventTable)
+        {
+            var criteria = new ValidateMoveBetDayCriteria { MatchIds = matchIds, EventTable = eventTable };
+            var servers = configuration.GetSection("SiteDbServer").Get<List<string>>();
+            foreach (var server in servers)
+            {
+                criteria.DbServer = server;
+                await repository.ExecuteAsync(criteria);
+                if (criteria.ErrCode > 0)
+                {
+                    return new ResultMessage
+                    {
+                        ErrorCode = criteria.ErrCode,
+                        ErrorMessage =
+                            "Cannot proceed due to this match is in during move-bet progress. Please contact admin for support."
                     };
                 }
             }

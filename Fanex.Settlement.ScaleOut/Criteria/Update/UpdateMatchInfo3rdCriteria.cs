@@ -12,9 +12,9 @@ namespace Fanex.Settlement.ScaleOut.Criteria.HappyFive
 
         public string Action { get; set; }
 
-        public int FTHome { get; set; }
+        public int? FTHome { get; set; }
 
-        public int FTAway { get; set; }
+        public int? FTAway { get; set; }
 
         public override string GetSettingKey() => "NAP_Admin_Match_Update";
 

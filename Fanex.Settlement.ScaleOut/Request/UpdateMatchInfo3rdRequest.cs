@@ -13,5 +13,7 @@
         public int? FTHome { get; set; }
 
         public int? FTAway { get; set; }
+
+        public string BetStatus { get; set; }
     }
 }

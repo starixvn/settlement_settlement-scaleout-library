@@ -16,6 +16,8 @@ namespace Fanex.Settlement.ScaleOut.Criteria.HappyFive
 
         public int? FTAway { get; set; }
 
+        public string BetStatus { get; set; }
+
         public override string GetSettingKey() => "NAP_Admin_Match_Update";
 
         public override bool IsValid() => MatchId > 0;

@@ -42,6 +42,8 @@ namespace Fanex.Settlement.ScaleOut.Criteria.Update
 
         public int? SDTRecord { get; set; }
 
+        public bool IsHtTicketSettled { get; set; }
+
         public override string GetSettingKey() => "NAP_Admin_MatchInfoUpd";
 
         public override bool IsValid() => MatchId > 0;

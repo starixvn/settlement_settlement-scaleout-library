@@ -1,7 +1,6 @@
-﻿
-namespace Fanex.Settlement.ScaleOut.Request
+﻿namespace Fanex.Settlement.ScaleOut.Request
 {
-    public class UpdateMatchInfoRequest 
+    public class UpdateMatchInfoRequest
     {
         public int MatchId { get; set; }
 
@@ -41,5 +40,6 @@ namespace Fanex.Settlement.ScaleOut.Request
 
         public int SDTRecord { get; set; }
 
+        public bool IsHtTicketSettled { get; set; }
     }
 }

@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Fanex.Data.Repository;
 using Fanex.Settlement.ScaleOut.Constants;
 using Fanex.Settlement.ScaleOut.Criteria;
@@ -10,9 +7,9 @@ using Fanex.Settlement.ScaleOut.Criteria.Normal;
 using Fanex.Settlement.ScaleOut.Criteria.Update;
 using Fanex.Settlement.ScaleOut.Models;
 using Fanex.Settlement.ScaleOut.Request;
-using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Fanex.Settlement.ScaleOut.Services
 {
@@ -35,22 +32,22 @@ namespace Fanex.Settlement.ScaleOut.Services
     {
         private readonly IDynamicRepository repository;
 
-        private readonly IConfiguration configuration;
-
         private readonly IMapper mapper;
 
         private readonly IHttpContextAccessor accessor;
 
+        private readonly GeneralService generalService;
+
         public ScaleOutSettleServiceImp(
             IDynamicRepository repository,
-            IConfiguration configuration,
             IMapper mapper,
-            IHttpContextAccessor accessor)
+            IHttpContextAccessor accessor,
+            GeneralService generalService)
         {
             this.repository = repository;
-            this.configuration = configuration;
             this.mapper = mapper;
             this.accessor = accessor;
+            this.generalService = generalService;
         }
 
         public async Task UpdateAutoRefundChildMatch(RefundChildMatchRequest request)
@@ -107,7 +104,7 @@ namespace Fanex.Settlement.ScaleOut.Services
         public async Task<ResultMessage> ValidateEventAndTicket(EventTicketRequest request)
         {
             var eventCriteria = mapper.Map<EventTicketRequest, ValidateEventCriteria>(request);
-            var validateEvent = await ValidateEvent(eventCriteria);
+            var validateEvent = await generalService.ExecuteSingle(eventCriteria);
 
             if (validateEvent.ErrorCode > 0)
             {
@@ -115,44 +112,13 @@ namespace Fanex.Settlement.ScaleOut.Services
             }
 
             var ticketCriteria = mapper.Map<EventTicketRequest, ValidateTicketCriteria>(request);
-            return await ValidateTickets(ticketCriteria);
-        }
-
-        private async Task<ResultMessage> ValidateTickets(ValidateTicketCriteria criteria)
-        {
-            var servers = configuration.GetSection("SiteDbServer").Get<List<string>>();
-            foreach (var server in servers)
-            {
-                criteria.DbServer = server;
-                await repository.ExecuteAsync(criteria);
-                if (criteria.ErrCode > 0)
-                {
-                    return new ResultMessage
-                    {
-                        ErrorCode = criteria.ErrCode,
-                        ErrorMessage = criteria.ErrMsg
-                    };
-                }
-            }
-
-            return new ResultMessage();
-        }
-
-        private async Task<ResultMessage> ValidateEvent(ValidateEventCriteria criteria)
-        {
-            await repository.ExecuteAsync(criteria);
-
-            return new ResultMessage
-            {
-                ErrorCode = criteria.ErrCode,
-                ErrorMessage = criteria.ErrMsg
-            };
+            return await generalService.ExecuteAsync(ticketCriteria);
         }
 
         public async Task<ResultMessage> ValidateEventAndTicketFastMarket(EventTicketFastMarketRequest request)
         {
             var eventCriteria = mapper.Map<EventTicketFastMarketRequest, ValidationEventFastMarketCriteria>(request);
-            var validateEvent = await ValidateEventFastMarket(eventCriteria);
+            var validateEvent = await generalService.ExecuteSingle(eventCriteria);
 
             if (validateEvent.ErrorCode > 0)
             {
@@ -160,38 +126,7 @@ namespace Fanex.Settlement.ScaleOut.Services
             }
 
             var ticketCriteria = mapper.Map<EventTicketFastMarketRequest, ValidationTicketFastMarketCriteria>(request);
-            return await ValidateTicketsFastMarket(ticketCriteria);
-        }
-
-        private async Task<ResultMessage> ValidateTicketsFastMarket(ValidationTicketFastMarketCriteria criteria)
-        {
-            var servers = configuration.GetSection("SiteDbServer").Get<List<string>>();
-            foreach (var server in servers)
-            {
-                criteria.DbServer = server;
-                await repository.ExecuteAsync(criteria);
-                if (criteria.ErrCode > 0)
-                {
-                    return new ResultMessage
-                    {
-                        ErrorCode = criteria.ErrCode,
-                        ErrorMessage = criteria.ErrMsg
-                    };
-                }
-            }
-
-            return new ResultMessage();
-        }
-
-        private async Task<ResultMessage> ValidateEventFastMarket(ValidationEventFastMarketCriteria criteria)
-        {
-            await repository.ExecuteAsync(criteria);
-
-            return new ResultMessage
-            {
-                ErrorCode = criteria.ErrCode,
-                ErrorMessage = criteria.ErrMsg
-            };
+            return await generalService.ExecuteAsync(ticketCriteria);
         }
 
         public async Task<int> GetSiteGroupId(string dbServer)

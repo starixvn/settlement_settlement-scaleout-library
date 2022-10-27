@@ -2,7 +2,7 @@
 
 namespace Fanex.Settlement.ScaleOut.Criteria.BetBuilder
 {
-    public class ValidateBetBuilderCriteria : NonQueryCommand
+    public class ValidateBetBuilderCriteria : ExecuteSingleCriteria
     {
         public int MatchId { get; set; }
 
@@ -13,10 +13,6 @@ namespace Fanex.Settlement.ScaleOut.Criteria.BetBuilder
         public string SelectedMarket { get; set; }
 
         public int VendorId { get; set; }
-
-        public int ErrCode { get; set; }
-
-        public string ErrMsg { get; set; }
 
         public string InvalidMarketId { get; set; }
 

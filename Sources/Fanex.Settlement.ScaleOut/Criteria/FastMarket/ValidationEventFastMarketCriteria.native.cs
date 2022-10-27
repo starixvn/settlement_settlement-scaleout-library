@@ -2,7 +2,7 @@
 
 namespace Fanex.Settlement.ScaleOut.Criteria.FastMarket
 {
-    public class ValidationEventFastMarketCriteria : NonQueryCommand
+    public class ValidationEventFastMarketCriteria : ExecuteSingleCriteria
     {
         public int MatchId { get; set; }
 
@@ -11,10 +11,6 @@ namespace Fanex.Settlement.ScaleOut.Criteria.FastMarket
         public bool IsAuto { get; set; }
 
         public string Results { get; set; }
-
-        public int ErrCode { get; set; }
-
-        public string ErrMsg { get; set; }
 
         public override string GetSettingKey() => "NAP_Admin_Settlement_ValidationFM_Event";
 

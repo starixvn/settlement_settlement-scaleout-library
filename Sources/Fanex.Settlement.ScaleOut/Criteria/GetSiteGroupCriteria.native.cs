@@ -10,6 +10,6 @@ namespace Fanex.Settlement.ScaleOut.Criteria
 
         public override string GetSettingKey() => $"Get_SiteDBGroupID_{DbServer}";
 
-        public override bool IsValid() => true;
+        public override bool IsValid() => DbServer.Length > 0;
     }
 }

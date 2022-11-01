@@ -52,7 +52,7 @@ namespace Fanex.Settlement.ScaleOut.Services
 
         public async Task UpdateAutoRefundChildMatch(RefundChildMatchRequest request)
         {
-            var leagueGroupIds = new int[] { 42, 74, 108 };
+            var leagueGroupIds = new[] { 42, 74, 108 };
             var isCalcAll = string.Equals(request.ActionName, ActionName.CalculateFullTime) ||
                             string.Equals(request.ActionName, ActionName.CalculateAll);
 

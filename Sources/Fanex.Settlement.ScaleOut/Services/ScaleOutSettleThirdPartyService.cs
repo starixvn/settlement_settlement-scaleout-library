@@ -63,22 +63,13 @@ public class ScaleOutSettleThirdPartyServiceImp : ScaleOutSettleThirdPartyServic
     public async Task<ResultMessage> ValidateMoveBetDay(string matchIds, string eventTable)
     {
         var criteria = new ValidateMoveBetDayCriteria { MatchIds = matchIds, EventTable = eventTable };
-        var servers = configuration.GetSection("SiteDbServer").Get<List<string>>();
-        foreach (var server in servers)
+        var resultValidate = await generalService.ExecuteAsync(criteria);
+        if (resultValidate.ErrorCode > 0)
         {
-            criteria.DbServer = server;
-            await repository.ExecuteAsync(criteria);
-            if (criteria.ErrCode > 0)
-            {
-                return new ResultMessage
-                {
-                    ErrorCode = criteria.ErrCode,
-                    ErrorMessage =
-                        "Cannot proceed due to this match is in during move-bet progress. Please contact admin for support."
-                };
-            }
+            resultValidate.ErrorMessage =
+                "Cannot proceed due to this match is in during move-bet progress. Please contact admin for support.";
         }
 
-        return new ResultMessage();
+        return resultValidate;
     }
 }

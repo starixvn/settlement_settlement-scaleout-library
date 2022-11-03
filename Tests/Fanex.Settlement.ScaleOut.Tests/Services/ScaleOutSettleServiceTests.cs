@@ -15,9 +15,11 @@ namespace Fanex.Settlement.ScaleOut.Tests.Services
 
         private readonly ScaleOutSettleService service;
 
+        private readonly IHttpContextAccessor accessor;
+
         public ScaleOutSettleServiceTests()
         {
-            var accessor = Substitute.For<IHttpContextAccessor>();
+            accessor = Substitute.For<IHttpContextAccessor>();
             var context = new DefaultHttpContext
             {
                 Connection =
@@ -40,7 +42,9 @@ namespace Fanex.Settlement.ScaleOut.Tests.Services
         [InlineData(1, 2, ActionName.RefundHalfTime, 42)]
         [InlineData(1, 2, ActionName.Undo, 42)]
         [InlineData(1, 2, ActionName.CalculateFullTime, 1)]
-        public void UpdateAutoRefundChildMatch_NotPassValidation_DoNotExecute(int home, int away, string action, int league)
+        [InlineData(null, 2, ActionName.CalculateFullTime, 42)]
+        [InlineData(2, null, ActionName.CalculateFullTime, 42)]
+        public void UpdateAutoRefundChildMatch_NotPassValidation_DoNotExecute(int? home, int? away, string action, int league)
         {
             var request = new RefundChildMatchRequest
             {
@@ -61,14 +65,14 @@ namespace Fanex.Settlement.ScaleOut.Tests.Services
             var request = new RefundChildMatchRequest
             {
                 HomeValue = 1,
-                AwayValue = 1,
+                AwayValue = 2,
                 ActionName = ActionName.CalculateFullTime,
                 LeagueGroupId = 42
             };
 
             service.UpdateAutoRefundChildMatch(request);
 
-            repository.ExecuteAsync(Arg.Any<UpdateAutoRefundChildMatchCriteria>());
+            repository.Received().ExecuteAsync(Arg.Any<UpdateAutoRefundChildMatchCriteria>());
         }
 
         [Fact]
@@ -76,7 +80,7 @@ namespace Fanex.Settlement.ScaleOut.Tests.Services
         {
             service.UpdateMatchInfo(new UpdateMatchInfoRequest());
 
-            repository.ExecuteAsync(Arg.Any<UpdateMatchInfoCriteria>());
+            repository.Received().ExecuteAsync(Arg.Any<UpdateMatchInfoCriteria>());
         }
 
         [Theory]
@@ -97,6 +101,16 @@ namespace Fanex.Settlement.ScaleOut.Tests.Services
             service.UpdateUnderSettlementFlag(1, 1, action);
 
             repository.Received().ExecuteAsync(Arg.Is<UpdateSettlementStatusCriteria>(item => item.IsEnabled == isEnable));
+        }
+
+        [Fact]
+        public async Task UpdateUnderSettlementFlag_PassValidationAndIpEmpty_ExecuteAsync()
+        {
+            accessor.HttpContext = null;
+            var tempService = new ScaleOutSettleServiceImp(repository, mapper, accessor, generalService);
+            await tempService.UpdateUnderSettlementFlag(1, 1, ActionName.CalculateFullTime);
+
+            await repository.Received().ExecuteAsync(Arg.Is<UpdateSettlementStatusCriteria>(item => item.Ip == string.Empty));
         }
 
         [Fact]

@@ -1,15 +1,9 @@
 ﻿using AutoMapper.Configuration;
-using Castle.Core.Smtp;
 using Fanex.Settlement.ScaleOut.Criteria.BetBuilder;
 using Fanex.Settlement.ScaleOut.Criteria.HappyFive;
 using Fanex.Settlement.ScaleOut.Services;
 using Microsoft.Extensions.Configuration;
 using NSubstitute;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 namespace Fanex.Settlement.ScaleOut.Tests.Services
@@ -78,22 +72,23 @@ namespace Fanex.Settlement.ScaleOut.Tests.Services
         }
 
         [Fact]
-        public async Task ValidateMoveBetDay_ExecutePassed_ExecuteEnoughTimesAsync()
+        public async Task ValidateMoveBetDay_ExecutePassed_ReturnNonError()
         {
+            generalService.ExecuteAsync(Arg.Any<ValidateMoveBetDayCriteria>()).Returns(new ResultMessage());
             var result = await service.ValidateMoveBetDay("1", "text");
 
-            await repository.Received(2).ExecuteAsync(Arg.Any<ValidateMoveBetDayCriteria>());
+            await generalService.Received().ExecuteAsync(Arg.Any<ValidateMoveBetDayCriteria>());
             Assert.Equal(0, result.ErrorCode);
         }
 
         [Fact]
-        public async Task ValidateMoveBetDay_ExecuteFailed_StopAndReturnError()
+        public async Task ValidateMoveBetDay_ExecuteFailed_ReturnError()
         {
-            await repository.ExecuteAsync(Arg.Do<ValidateMoveBetDayCriteria>(item => item.ErrCode = 1));
+            generalService.ExecuteAsync(Arg.Any<ValidateMoveBetDayCriteria>()).Returns(new ResultMessage { ErrorCode = 1 });
 
             var result = await service.ValidateMoveBetDay("1", "text");
 
-            await repository.Received(1).ExecuteAsync(Arg.Any<ValidateMoveBetDayCriteria>());
+            await generalService.Received().ExecuteAsync(Arg.Any<ValidateMoveBetDayCriteria>());
             Assert.Equal(1, result.ErrorCode);
             Assert.Equal("Cannot proceed due to this match is in during move-bet progress. Please contact admin for support.", result.ErrorMessage);
         }

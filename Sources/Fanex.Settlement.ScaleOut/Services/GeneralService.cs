@@ -1,61 +1,52 @@
-﻿using Fanex.Data.Repository;
-using Fanex.Settlement.ScaleOut.Criteria;
-using Fanex.Settlement.ScaleOut.Criteria.FastMarket;
-using Fanex.Settlement.ScaleOut.Models;
-using Microsoft.Extensions.Configuration;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿namespace Fanex.Settlement.ScaleOut.Services;
 
-namespace Fanex.Settlement.ScaleOut.Services
+public interface GeneralService
 {
-    public interface GeneralService
-    {
-        Task<ResultMessage> ExecuteAsync(ExecuteCriteria criteria);
+    Task<ResultMessage> ExecuteAsync(ExecuteCriteria criteria);
 
-        Task<ResultMessage> ExecuteSingle(ExecuteSingleCriteria criteria);
+    Task<ResultMessage> ExecuteSingle(ExecuteSingleCriteria criteria);
+}
+
+public class GeneralServiceImp : GeneralService
+{
+    private readonly IConfiguration configuration;
+
+    private readonly IDynamicRepository repository;
+
+    public GeneralServiceImp(IConfiguration configuration, IDynamicRepository repository)
+    {
+        this.configuration = configuration;
+        this.repository = repository;
     }
 
-    public class GeneralServiceImp : GeneralService
+    public async Task<ResultMessage> ExecuteAsync(ExecuteCriteria criteria)
     {
-        private readonly IConfiguration configuration;
-
-        private readonly IDynamicRepository repository;
-
-        public GeneralServiceImp(IConfiguration configuration, IDynamicRepository repository)
+        var servers = configuration.GetSection("SiteDbServer").Get<List<string>>();
+        foreach (var server in servers)
         {
-            this.configuration = configuration;
-            this.repository = repository;
-        }
-
-        public async Task<ResultMessage> ExecuteAsync(ExecuteCriteria criteria)
-        {
-            var servers = configuration.GetSection("SiteDbServer").Get<List<string>>();
-            foreach (var server in servers)
-            {
-                criteria.DbServer = server;
-                await repository.ExecuteAsync(criteria);
-                if (criteria.ErrCode > 0)
-                {
-                    return new ResultMessage
-                    {
-                        ErrorCode = criteria.ErrCode,
-                        ErrorMessage = criteria.ErrMsg
-                    };
-                }
-            }
-
-            return new ResultMessage();
-        }
-
-        public async Task<ResultMessage> ExecuteSingle(ExecuteSingleCriteria criteria)
-        {
+            criteria.DbServer = server;
             await repository.ExecuteAsync(criteria);
-
-            return new ResultMessage
+            if (criteria.ErrCode > 0)
             {
-                ErrorCode = criteria.ErrCode,
-                ErrorMessage = criteria.ErrMsg
-            };
+                return new ResultMessage
+                {
+                    ErrorCode = criteria.ErrCode,
+                    ErrorMessage = criteria.ErrMsg
+                };
+            }
         }
+
+        return new ResultMessage();
+    }
+
+    public async Task<ResultMessage> ExecuteSingle(ExecuteSingleCriteria criteria)
+    {
+        await repository.ExecuteAsync(criteria);
+
+        return new ResultMessage
+        {
+            ErrorCode = criteria.ErrCode,
+            ErrorMessage = criteria.ErrMsg
+        };
     }
 }

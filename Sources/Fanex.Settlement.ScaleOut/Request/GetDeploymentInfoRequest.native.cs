@@ -1,7 +1,6 @@
-﻿namespace Fanex.Settlement.ScaleOut.Request
+﻿namespace Fanex.Settlement.ScaleOut.Request;
+
+public class GetDeploymentInfoRequest
 {
-    public class GetDeploymentInfoRequest
-    {
-        public string SPName { get; set; }
-    }
+    public string SPName { get; set; }
 }

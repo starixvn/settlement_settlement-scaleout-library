@@ -1,15 +1,14 @@
-﻿namespace Fanex.Settlement.ScaleOut.Constants
+﻿namespace Fanex.Settlement.ScaleOut.Constants;
+
+public class ActionName
 {
-    public class ActionName
-    {
-        public const string CalculateHalfTime = "CAL-HT";
+    public const string CalculateHalfTime = "CAL-HT";
 
-        public const string CalculateFullTime = "CAL-FT";
+    public const string CalculateFullTime = "CAL-FT";
 
-        public const string CalculateAll = "CAL";
+    public const string CalculateAll = "CAL";
 
-        public const string Undo = "UNDO";
+    public const string Undo = "UNDO";
 
-        public const string RefundHalfTime = "REFUND-HT";
-    }
+    public const string RefundHalfTime = "REFUND-HT";
 }

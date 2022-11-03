@@ -1,9 +1,8 @@
-﻿namespace Fanex.Settlement.ScaleOut.Models
-{
-    public class ResultMessage
-    {
-        public int ErrorCode { get; set; }
+﻿namespace Fanex.Settlement.ScaleOut.Models;
 
-        public string ErrorMessage { get; set; }
-    }
+public class ResultMessage
+{
+    public int ErrorCode { get; set; }
+
+    public string ErrorMessage { get; set; }
 }

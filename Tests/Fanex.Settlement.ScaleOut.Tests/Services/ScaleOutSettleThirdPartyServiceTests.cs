@@ -4,17 +4,12 @@ using Fanex.Settlement.ScaleOut.Criteria.HappyFive;
 using Fanex.Settlement.ScaleOut.Services;
 using Microsoft.Extensions.Configuration;
 using NSubstitute;
-using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 namespace Fanex.Settlement.ScaleOut.Tests.Services
 {
     public class ScaleOutSettleThirdPartyServiceTests
     {
         private readonly IDynamicRepository repository;
-
-        private readonly IConfiguration configuration;
-
-        private readonly IMapper mapper;
 
         private readonly GeneralService generalService;
 
@@ -30,11 +25,11 @@ namespace Fanex.Settlement.ScaleOut.Tests.Services
                 { "SiteDbServer:1", "02" }
             };
 
-            configuration = new ConfigurationBuilder().AddInMemoryCollection(inMemory).Build();
+            var configuration = new ConfigurationBuilder().AddInMemoryCollection(inMemory).Build();
             var mapperConfig = new MapperConfigurationExpression();
             mapperConfig.AddProfile<ScaleOutMappingProfile>();
             var config = new MapperConfiguration(mapperConfig);
-            mapper = new Mapper(config);
+            var mapper = new Mapper(config);
             service = new ScaleOutSettleThirdPartyServiceImp(repository, configuration, mapper, generalService);
         }
 

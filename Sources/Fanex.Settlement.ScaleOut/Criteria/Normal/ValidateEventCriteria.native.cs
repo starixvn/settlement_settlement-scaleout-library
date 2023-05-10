@@ -12,6 +12,8 @@ public class ValidateEventCriteria : ExecuteSingleCriteria
 
     public string SelectedResources { get; set; }
 
+    public int InstantKey { get; set; }
+
     public string SpName { get; set; }
 
     public int SDTRecord { get; set; }

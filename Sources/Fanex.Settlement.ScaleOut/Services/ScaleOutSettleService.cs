@@ -81,7 +81,7 @@ public class ScaleOutSettleServiceImp : ScaleOutSettleService
                 AdminId = adminId,
                 Ip = httpContext == null ? string.Empty : httpContext.Connection.RemoteIpAddress.ToString(),
                 Type = settlementSystem,
-                IsEnabled = actionName != ActionName.Undo
+                IsEnabled = actionName != ActionName.Undo && actionName != ActionName.UndoFT
             };
 
             await repository.ExecuteAsync(criteria);

@@ -10,5 +10,7 @@ public class ActionName
 
     public const string Undo = "UNDO";
 
+    public const string UndoFT = "UNDO-FT";
+
     public const string RefundHalfTime = "REFUND-HT";
 }

@@ -17,20 +17,16 @@ public class ScaleOutSettleThirdPartyServiceImp : ScaleOutSettleThirdPartyServic
 {
     private readonly IDynamicRepository repository;
 
-    private readonly IConfiguration configuration;
-
     private readonly IMapper mapper;
 
     private readonly GeneralService generalService;
 
     public ScaleOutSettleThirdPartyServiceImp(
         IDynamicRepository repository,
-        IConfiguration configuration,
         IMapper mapper,
         GeneralService generalService)
     {
         this.repository = repository;
-        this.configuration = configuration;
         this.mapper = mapper;
         this.generalService = generalService;
     }

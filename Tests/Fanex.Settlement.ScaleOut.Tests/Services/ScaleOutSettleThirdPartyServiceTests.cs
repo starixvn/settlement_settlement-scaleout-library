@@ -2,7 +2,6 @@
 using Fanex.Settlement.ScaleOut.Criteria.BetBuilder;
 using Fanex.Settlement.ScaleOut.Criteria.HappyFive;
 using Fanex.Settlement.ScaleOut.Services;
-using Microsoft.Extensions.Configuration;
 using NSubstitute;
 
 namespace Fanex.Settlement.ScaleOut.Tests.Services
@@ -19,18 +18,12 @@ namespace Fanex.Settlement.ScaleOut.Tests.Services
         {
             repository = Substitute.For<IDynamicRepository>();
             generalService = Substitute.For<GeneralService>();
-            var inMemory = new Dictionary<string, string>
-            {
-                { "SiteDbServer:0", "01" },
-                { "SiteDbServer:1", "02" }
-            };
 
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(inMemory).Build();
             var mapperConfig = new MapperConfigurationExpression();
             mapperConfig.AddProfile<ScaleOutMappingProfile>();
             var config = new MapperConfiguration(mapperConfig);
             var mapper = new Mapper(config);
-            service = new ScaleOutSettleThirdPartyServiceImp(repository, configuration, mapper, generalService);
+            service = new ScaleOutSettleThirdPartyServiceImp(repository, mapper, generalService);
         }
 
         [Fact]

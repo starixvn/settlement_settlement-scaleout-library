@@ -30,5 +30,7 @@ public static class Mode
 
     public const string NumberGame = "161";
 
+    public const string LeapGaming = "3rd";
+
     public const string Outright = "outright";
 }

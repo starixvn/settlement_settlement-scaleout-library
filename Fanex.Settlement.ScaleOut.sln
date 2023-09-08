@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sources", "Sources", "{ECD1
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fanex.Settlement.ScaleOut", "Sources\Fanex.Settlement.ScaleOut\Fanex.Settlement.ScaleOut.csproj", "{65C48D32-5311-4023-9370-6B3173D51326}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fanex.ThirdPartyBroadcast.Shared", "Sources\Fanex.ThirdPartyBroadcast.Shared\Fanex.ThirdPartyBroadcast.Shared.csproj", "{A1D20959-C8E3-41A9-A132-703F095BC5A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{65C48D32-5311-4023-9370-6B3173D51326}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65C48D32-5311-4023-9370-6B3173D51326}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65C48D32-5311-4023-9370-6B3173D51326}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1D20959-C8E3-41A9-A132-703F095BC5A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1D20959-C8E3-41A9-A132-703F095BC5A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1D20959-C8E3-41A9-A132-703F095BC5A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1D20959-C8E3-41A9-A132-703F095BC5A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{414D1C45-A018-4848-9C2A-AA0A9D7FC99A} = {446224E7-A10E-49FC-812C-165B5BD29B45}
 		{65C48D32-5311-4023-9370-6B3173D51326} = {ECD184E0-B5B0-4AB1-89AF-B8AC0312C877}
+		{A1D20959-C8E3-41A9-A132-703F095BC5A9} = {ECD184E0-B5B0-4AB1-89AF-B8AC0312C877}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1C77B75B-95D9-4212-ABC6-637414BCACC2}

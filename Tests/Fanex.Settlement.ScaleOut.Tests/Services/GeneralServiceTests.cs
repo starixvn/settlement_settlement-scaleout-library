@@ -6,8 +6,6 @@ namespace Fanex.Settlement.ScaleOut.Tests.Services;
 
 public class GeneralServiceTests
 {
-    private readonly IConfiguration configuration;
-
     private readonly IDynamicRepository repository;
 
     private readonly GeneralService service;
@@ -19,7 +17,7 @@ public class GeneralServiceTests
             {"SiteDbServer:0", "01"},
             {"SiteDbServer:1", "02"}
         };
-        configuration = new ConfigurationBuilder().AddInMemoryCollection(inMemorySettings).Build();
+        var configuration = new ConfigurationBuilder().AddInMemoryCollection(inMemorySettings).Build();
         service = new GeneralServiceImp(configuration, repository);
     }
 

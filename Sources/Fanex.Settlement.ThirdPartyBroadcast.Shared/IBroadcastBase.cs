@@ -1,6 +1,6 @@
 ﻿namespace Fanex.Settlement.ThirdPartyBroadcast.Shared;
 
-public interface BroadcastBase
+public interface IBroadcastBase
 {
     public string ProductType { get; set; }
 

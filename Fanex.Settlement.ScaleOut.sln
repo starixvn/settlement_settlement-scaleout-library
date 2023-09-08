@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sources", "Sources", "{ECD1
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fanex.Settlement.ScaleOut", "Sources\Fanex.Settlement.ScaleOut\Fanex.Settlement.ScaleOut.csproj", "{65C48D32-5311-4023-9370-6B3173D51326}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fanex.ThirdPartyBroadcast.Shared", "Sources\Fanex.ThirdPartyBroadcast.Shared\Fanex.ThirdPartyBroadcast.Shared.csproj", "{A1D20959-C8E3-41A9-A132-703F095BC5A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fanex.Settlement.ThirdPartyBroadcast.Shared", "Sources\Fanex.Settlement.ThirdPartyBroadcast.Shared\Fanex.Settlement.ThirdPartyBroadcast.Shared.csproj", "{A1D20959-C8E3-41A9-A132-703F095BC5A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

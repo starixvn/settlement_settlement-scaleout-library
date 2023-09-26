@@ -2,5 +2,5 @@
 
 public class GetDeploymentInfoRequest
 {
-    public string SPName { get; set; }
+    public string SpName { get; set; }
 }

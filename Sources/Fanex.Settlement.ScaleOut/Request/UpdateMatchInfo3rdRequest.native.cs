@@ -1,6 +1,6 @@
 ﻿namespace Fanex.Settlement.ScaleOut.Request;
 
-public class UpdateMatchInfo3rdRequest
+public class UpdateMatchInfo3RdRequest
 {
     public int MatchId { get; set; }
 

@@ -1,5 +1,4 @@
-﻿using AutoMapper.Configuration;
-using Fanex.Settlement.ScaleOut.Services;
+﻿using Fanex.Settlement.ScaleOut.Services;
 using Microsoft.AspNetCore.Http;
 using NSubstitute;
 

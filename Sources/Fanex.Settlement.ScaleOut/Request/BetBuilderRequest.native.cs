@@ -10,5 +10,5 @@ public class BetBuilderRequest
 
     public string SelectedMarket { get; set; }
 
-    public int VendorID { get; set; }
+    public int VendorId { get; set; }
 }

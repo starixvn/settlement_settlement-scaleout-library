@@ -1,6 +1,6 @@
-﻿namespace Fanex.Settlement.ScaleOut.Criteria.HappyFive;
+﻿namespace Fanex.Settlement.ScaleOut.Criteria.Update;
 
-public class UpdateMatchInfo3rdCriteria : NonQueryCommand
+public class UpdateMatchInfo3RdCriteria : NonQueryCommand
 {
     public int MatchId { get; set; }
 

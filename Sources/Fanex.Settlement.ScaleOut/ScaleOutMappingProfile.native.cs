@@ -10,6 +10,6 @@ public class ScaleOutMappingProfile : Profile
         CreateMap<EventTicketFastMarketRequest, ValidationTicketFastMarketCriteria>();
         CreateMap<UpdateMatchInfoRequest, UpdateMatchInfoCriteria>();
         CreateMap<BetBuilderRequest, ValidateBetBuilderCriteria>();
-        CreateMap<UpdateMatchInfo3rdRequest, UpdateMatchInfo3rdCriteria>();
+        CreateMap<UpdateMatchInfo3RdRequest, UpdateMatchInfo3RdCriteria>();
     }
 }

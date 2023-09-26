@@ -1,6 +1,4 @@
-﻿using AutoMapper.Configuration;
-using Fanex.Settlement.ScaleOut.Criteria.BetBuilder;
-using Fanex.Settlement.ScaleOut.Criteria.HappyFive;
+﻿using Fanex.Settlement.ScaleOut.Criteria.BetBuilder;
 using Fanex.Settlement.ScaleOut.Services;
 using NSubstitute;
 
@@ -46,9 +44,9 @@ namespace Fanex.Settlement.ScaleOut.Tests.Services
         [Fact]
         public void UpdateMatchInfo3rd_Always_Execute()
         {
-            service.UpdateMatchInfo3rd(new UpdateMatchInfo3rdRequest());
+            service.UpdateMatchInfo3rd(new UpdateMatchInfo3RdRequest());
 
-            repository.Received().ExecuteAsync(Arg.Any<UpdateMatchInfo3rdCriteria>());
+            repository.Received().ExecuteAsync(Arg.Any<UpdateMatchInfo3RdCriteria>());
         }
 
         [Fact]

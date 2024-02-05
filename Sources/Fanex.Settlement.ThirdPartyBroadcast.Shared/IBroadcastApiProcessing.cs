@@ -1,5 +1,3 @@
 ﻿namespace Fanex.Settlement.ThirdPartyBroadcast.Shared;
 
-public interface IBroadcastApiProcessing : IBroadcastBase
-{
-}
+public interface IBroadcastApiProcessing : IBroadcastBase;

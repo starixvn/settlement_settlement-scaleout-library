@@ -21,4 +21,6 @@ public static class ProductType
     public const string FastMarket = "9";
 
     public const string LeapGaming = "10";
+
+    public const string CockFighting = "11";
 }

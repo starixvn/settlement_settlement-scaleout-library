@@ -14,6 +14,8 @@ public class ValidateBetBuilderCriteria : ExecuteSingleCriteria
 
     public string InvalidMarketId { get; set; }
 
+    public string NoResultMarketId { get; set; }
+
     public override string GetSettingKey() => "NAP_Admin_Settlement_Betbuilder_Validation_Event";
 
     public override bool IsValid() => MatchId > 0;

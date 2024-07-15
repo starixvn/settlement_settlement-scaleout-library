@@ -38,7 +38,7 @@ namespace Fanex.Settlement.ScaleOut.Tests.Services
 
             Assert.Equal(1, result.Item1.ErrorCode);
             Assert.Equal("Error", result.Item1.ErrorMessage);
-            Assert.Equal("1", result.Item2);
+            Assert.Equal("1", result.Item2.MarketIds);
         }
 
         [Fact]

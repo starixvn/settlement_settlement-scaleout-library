@@ -23,4 +23,6 @@ public static class ProductType
     public const string LeapGaming = "10";
 
     public const string CockFighting = "11";
+
+    public const string VirtualSports5 = "12";
 }

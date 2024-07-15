@@ -7,18 +7,9 @@ public interface GeneralService
     Task<ResultMessage> ExecuteSingle(ExecuteSingleCriteria criteria);
 }
 
-public class GeneralServiceImp : GeneralService
+public class GeneralServiceImp(IConfiguration configuration, IDynamicRepository repository)
+    : GeneralService
 {
-    private readonly IConfiguration configuration;
-
-    private readonly IDynamicRepository repository;
-
-    public GeneralServiceImp(IConfiguration configuration, IDynamicRepository repository)
-    {
-        this.configuration = configuration;
-        this.repository = repository;
-    }
-
     public async Task<ResultMessage> ExecuteAsync(ExecuteCriteria criteria)
     {
         var servers = configuration.GetSection("SiteDbServer").Get<List<string>>();

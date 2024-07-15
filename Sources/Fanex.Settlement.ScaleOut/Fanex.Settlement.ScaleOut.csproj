@@ -6,7 +6,7 @@
     <Authors>Levi.vu, Kaden.Trinh</Authors>
     <Product>Settlement</Product>
     <Description>Provide some common methods run on Multi-Server</Description>
-    <Version>1.3.9</Version>
+    <Version>1.4.2</Version>
     <PackageProjectUrl>https://gitlab.nexdev.net/settlement/settlement-scaleout-library</PackageProjectUrl>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>

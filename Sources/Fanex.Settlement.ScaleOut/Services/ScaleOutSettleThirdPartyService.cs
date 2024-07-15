@@ -13,24 +13,12 @@ public interface ScaleOutSettleThirdPartyService
     Task<ResultMessage> ValidateMoveBetDay(string matchIds, string eventTable, DateTime? eventDate = null);
 }
 
-public class ScaleOutSettleThirdPartyServiceImp : ScaleOutSettleThirdPartyService
+public class ScaleOutSettleThirdPartyServiceImp(
+    IDynamicRepository repository,
+    IMapper mapper,
+    GeneralService generalService)
+    : ScaleOutSettleThirdPartyService
 {
-    private readonly IDynamicRepository repository;
-
-    private readonly IMapper mapper;
-
-    private readonly GeneralService generalService;
-
-    public ScaleOutSettleThirdPartyServiceImp(
-        IDynamicRepository repository,
-        IMapper mapper,
-        GeneralService generalService)
-    {
-        this.repository = repository;
-        this.mapper = mapper;
-        this.generalService = generalService;
-    }
-
     public async Task<(ResultMessage, InvalidMarkets)> ValidateBetBuilder(BetBuilderRequest request)
     {
         var eventCriteria = mapper.Map<BetBuilderRequest, ValidateBetBuilderCriteria>(request);

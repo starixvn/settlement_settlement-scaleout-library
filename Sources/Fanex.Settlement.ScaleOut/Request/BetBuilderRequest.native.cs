@@ -8,7 +8,7 @@ public class BetBuilderRequest
 
     public bool IsAuto { get; set; }
 
-    public string SelectedMarket { get; set; }
+    public string SelectedSelection { get; set; }
 
     public int VendorId { get; set; }
 }

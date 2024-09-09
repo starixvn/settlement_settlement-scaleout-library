@@ -1,5 +1,4 @@
-﻿using Fanex.Settlement.ScaleOut.Criteria.BetBuilder;
-using Fanex.Settlement.ScaleOut.Services;
+﻿using Fanex.Settlement.ScaleOut.Services;
 using NSubstitute;
 
 namespace Fanex.Settlement.ScaleOut.Tests.Services
@@ -10,7 +9,7 @@ namespace Fanex.Settlement.ScaleOut.Tests.Services
 
         private readonly GeneralService generalService;
 
-        private readonly ScaleOutSettleThirdPartyService service;
+        private readonly ScaleOutSettleThirdPartyServiceImp service;
 
         public ScaleOutSettleThirdPartyServiceTests()
         {
@@ -22,23 +21,6 @@ namespace Fanex.Settlement.ScaleOut.Tests.Services
             var config = new MapperConfiguration(mapperConfig);
             var mapper = new Mapper(config);
             service = new ScaleOutSettleThirdPartyServiceImp(repository, mapper, generalService);
-        }
-
-        [Fact]
-        public async Task ValidateBetBuilder_Always_CallAndReturnValueAsync()
-        {
-            await repository.ExecuteAsync(Arg.Do<ValidateBetBuilderCriteria>(item =>
-            {
-                item.InvalidMarketId = "1";
-                item.ErrCode = 1;
-                item.ErrMsg = "Error";
-            }));
-
-            var result = await service.ValidateBetBuilder(new BetBuilderRequest());
-
-            Assert.Equal(1, result.Item1.ErrorCode);
-            Assert.Equal("Error", result.Item1.ErrorMessage);
-            Assert.Equal("1", result.Item2.MarketIds);
         }
 
         [Fact]

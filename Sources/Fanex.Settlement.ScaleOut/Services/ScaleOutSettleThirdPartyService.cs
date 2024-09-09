@@ -4,8 +4,6 @@ namespace Fanex.Settlement.ScaleOut.Services;
 
 public interface ScaleOutSettleThirdPartyService
 {
-    Task<(ResultMessage, InvalidMarkets)> ValidateBetBuilder(BetBuilderRequest request);
-
     Task<ResultMessage> GetDeploymentInfo(GetDeploymentInfoRequest request);
 
     Task UpdateMatchInfo3rd(UpdateMatchInfo3RdRequest request);
@@ -19,20 +17,6 @@ public class ScaleOutSettleThirdPartyServiceImp(
     GeneralService generalService)
     : ScaleOutSettleThirdPartyService
 {
-    public async Task<(ResultMessage, InvalidMarkets)> ValidateBetBuilder(BetBuilderRequest request)
-    {
-        var eventCriteria = mapper.Map<BetBuilderRequest, ValidateBetBuilderCriteria>(request);
-        await repository.ExecuteAsync(eventCriteria);
-
-        var result = new ResultMessage
-        {
-            ErrorCode = eventCriteria.ErrCode,
-            ErrorMessage = eventCriteria.ErrMsg
-        };
-
-        return (result, new InvalidMarkets(eventCriteria.InvalidMarketId, eventCriteria.NoResultMarketId));
-    }
-
     public async Task UpdateMatchInfo3rd(UpdateMatchInfo3RdRequest request)
     {
         var criteria = mapper.Map<UpdateMatchInfo3RdRequest, UpdateMatchInfo3RdCriteria>(request);

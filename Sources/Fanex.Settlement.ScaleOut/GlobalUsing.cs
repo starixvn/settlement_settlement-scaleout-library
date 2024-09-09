@@ -2,7 +2,6 @@
 global using Fanex.Data.Repository;
 global using Fanex.Settlement.ScaleOut.Constants;
 global using Fanex.Settlement.ScaleOut.Criteria;
-global using Fanex.Settlement.ScaleOut.Criteria.BetBuilder;
 global using Fanex.Settlement.ScaleOut.Criteria.FastMarket;
 global using Fanex.Settlement.ScaleOut.Criteria.Normal;
 global using Fanex.Settlement.ScaleOut.Criteria.Update;

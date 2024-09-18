@@ -25,4 +25,8 @@ public static class ProductType
     public const string CockFighting = "11";
 
     public const string VirtualSports5 = "12";
+
+    public const string VirtualSports6 = "13";
+
+    public const string VirtualRacing = "14";
 }

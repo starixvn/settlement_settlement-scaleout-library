@@ -29,4 +29,6 @@ public static class ProductType
     public const string VirtualSports6 = "13";
 
     public const string VirtualRacing = "14";
+
+    public const string VirtualKiron = "15";
 }

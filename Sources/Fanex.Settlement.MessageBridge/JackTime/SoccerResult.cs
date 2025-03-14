@@ -6,7 +6,5 @@ public class SoccerResult
     public string SelectedResources { get; set; }
 
     public string Action { get; set; }
-
-    public byte SDTRecord { get; set; }
 }
 

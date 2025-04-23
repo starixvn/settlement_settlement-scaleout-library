@@ -1,0 +1,14 @@
+﻿using Microsoft.Extensions.DependencyInjection;
+
+namespace Fanex.SiteDbConnectionManager.Services;
+
+public static class ServiceCollectionExtensions
+{
+    public static IServiceCollection AddSiteDbConnectionManagerServices(this IServiceCollection services)
+    {
+        services.AddTransient<SiteDbService, SiteDbServiceImp>();
+        services.AddTransient<SiteDbPendingCommandServices, SiteDbPendingCommandServicesImp>();
+
+        return services;
+    }
+}

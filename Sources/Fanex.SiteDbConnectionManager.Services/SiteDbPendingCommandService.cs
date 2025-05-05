@@ -1,12 +1,13 @@
 ﻿using Fanex.Data.Repository;
-using Fanex.SiteDbConnectionManager.Models;
+using Fanex.SiteDbConnectionManager.Client.Models;
+using Fanex.SiteDbConnectionManager.Client.Services;
 using Fanex.SiteDbConnectionManager.Services.Criteria;
 
 namespace Fanex.SiteDbConnectionManager.Services;
 
-public class SiteDbPendingCommandServicesImp(IDynamicRepository repository) : SiteDbPendingCommandServices
+public class SiteDbPendingCommandServiceImp(IDynamicRepository repository) : SiteDbPendingCommandService
 {
-    public async Task<int> SavePendingCommand(SiteDbPendingCommand command)
+    public async Task<ResultMessage> SavePendingCommand(SiteDbPendingCommand command)
     {
         var criteria = new SavePendingCommandCriteria
         {
@@ -17,13 +18,18 @@ public class SiteDbPendingCommandServicesImp(IDynamicRepository repository) : Si
             Action = command.Action,
             IP = command.IP,
             AdminId = command.AdminId,
-            IsAPI = command.IsAPI,
+            SystemName = command.SystemName,
             SiteDBGroupId = command.SiteDBGroupId,
             StatusId = command.StatusId
         };
 
         await repository.ExecuteAsync(criteria);
-        return criteria.ErrCode;
+
+        return new ResultMessage
+        {
+            ErrorCode = 0,
+            ErrorMessage = string.Empty
+        };
     }
 
     public async Task<bool> UpdatePendingCommandStatus(int pId, int statusId)
@@ -36,5 +42,20 @@ public class SiteDbPendingCommandServicesImp(IDynamicRepository repository) : Si
 
         await repository.ExecuteAsync(criteria);
         return true;
+    }
+
+    public async Task<ResultMessage> CheckingPendingCommand(int matchId)
+    {
+        var criteria = new CheckingPendingCommandCriteria
+        {
+            MatchId = matchId
+        };
+        await repository.ExecuteAsync(criteria);
+
+        return new ResultMessage
+        {
+            ErrorCode = criteria.ErrCode,
+            ErrorMessage = criteria.ErrMsg
+        };
     }
 }

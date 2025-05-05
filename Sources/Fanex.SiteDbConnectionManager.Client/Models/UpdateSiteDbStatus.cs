@@ -1,4 +1,4 @@
-﻿namespace Fanex.SiteDbConnectionManager.Models;
+﻿namespace Fanex.SiteDbConnectionManager.Client.Models;
 
 public class UpdateSiteDbStatus
 {

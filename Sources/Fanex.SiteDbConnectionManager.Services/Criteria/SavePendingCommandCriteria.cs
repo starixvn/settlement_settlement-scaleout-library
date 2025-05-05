@@ -6,7 +6,7 @@ public class SavePendingCommandCriteria : NonQueryCommand
 {
     public int MatchId { get; set; }
 
-    public string SportType { get; set; }
+    public int SportType { get; set; }
 
     public string SpName { get; set; }
 
@@ -16,19 +16,15 @@ public class SavePendingCommandCriteria : NonQueryCommand
 
     public string IP { get; set; }
 
-    public string AdminId { get; set; }
+    public string SystemName { get; set; }
 
-    public bool IsAPI { get; set; }
+    public int AdminId { get; set; }
 
-    public string SiteDBGroupId { get; set; }
+    public int SiteDBGroupId { get; set; }
 
     public int StatusId { get; set; }
 
-    public int ErrCode { get; set; }
-
-    public string ErrMsg { get; set; }
-
     public override string GetSettingKey() => "SiteDB_PendingCommand_Ins";
 
-    public override bool IsValid() => !string.IsNullOrWhiteSpace(SpName) && !string.IsNullOrWhiteSpace(SiteDBGroupId);
+    public override bool IsValid() => !string.IsNullOrWhiteSpace(SpName) && MatchId > 0;
 }

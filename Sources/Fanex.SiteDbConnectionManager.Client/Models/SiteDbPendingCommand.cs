@@ -1,4 +1,4 @@
-﻿namespace Fanex.SiteDbConnectionManager.Models;
+﻿namespace Fanex.SiteDbConnectionManager.Client.Models;
 
 public class SiteDbPendingCommand
 {
@@ -6,7 +6,7 @@ public class SiteDbPendingCommand
 
     public int MatchId { get; set; }
 
-    public string SportType { get; set; }
+    public int SportType { get; set; }
 
     public string SpName { get; set; }
 
@@ -16,11 +16,11 @@ public class SiteDbPendingCommand
 
     public string IP { get; set; }
 
-    public string AdminId { get; set; }
+    public int AdminId { get; set; }
 
-    public bool IsAPI { get; set; }
+    public string SystemName { get; set; }
 
-    public string SiteDBGroupId { get; set; }
+    public int SiteDBGroupId { get; set; }
 
     public int StatusId { get; set; }
 }

@@ -6,6 +6,8 @@ public class CheckingPendingCommandCriteria : NonQueryCommand
 {
     public int MatchId { get; set; }
 
+    public int SiteDbGroupId { get; set; }
+
     public int ErrCode { get; set; }
 
     public string ErrMsg { get; set; }

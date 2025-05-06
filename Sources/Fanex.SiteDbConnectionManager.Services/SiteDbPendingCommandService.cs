@@ -44,11 +44,12 @@ public class SiteDbPendingCommandServiceImp(IDynamicRepository repository) : Sit
         return true;
     }
 
-    public async Task<ResultMessage> CheckingPendingCommand(int matchId)
+    public async Task<ResultMessage> CheckingPendingCommand(int matchId, int siteDbGroupId)
     {
         var criteria = new CheckingPendingCommandCriteria
         {
-            MatchId = matchId
+            MatchId = matchId,
+            SiteDbGroupId = siteDbGroupId
         };
         await repository.ExecuteAsync(criteria);
 

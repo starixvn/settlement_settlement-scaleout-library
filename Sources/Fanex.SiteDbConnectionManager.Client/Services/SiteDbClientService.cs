@@ -5,6 +5,8 @@ namespace Fanex.SiteDbConnectionManager.Client.Services;
 
 public interface SiteDbClientService
 {
+    Task<List<SiteDb>> GetAllSiteDbAsync();
+
     Task<List<SiteDb>> GetActiveSiteDbAsync();
 
     Task<bool> IsSiteDbActiveAsync(int siteDbGroupId);
@@ -14,12 +16,18 @@ public class SiteDbClientServiceImp(ICacheService cacheService, SiteDbService si
 {
     private static readonly TimeSpan CacheDuration = TimeSpan.FromSeconds(5);
 
+    public async Task<List<SiteDb>> GetAllSiteDbAsync()
+    {
+        const string cacheKey = "settle_tvs_sitedbs";
+        return await cacheService.GetOrSetAsync(cacheKey,
+            async () => await siteDbService.GetAllSiteDbAsync(),
+            new CacheItemOptions().SetAbsoluteExpiration(CacheDuration));
+    }
+
     public async Task<List<SiteDb>> GetActiveSiteDbAsync()
     {
-        const string cacheKey = "settle_tvs_active_sitedbs";
-        return await cacheService.GetOrSetAsync(cacheKey,
-            async () => await siteDbService.GetActiveSiteDbAsync(),
-            new CacheItemOptions().SetAbsoluteExpiration(CacheDuration));
+        var allSiteDBs = await GetAllSiteDbAsync();
+        return allSiteDBs.Where(x => x.Status).ToList();
     }
 
     public async Task<bool> IsSiteDbActiveAsync(int siteDbGroupId)

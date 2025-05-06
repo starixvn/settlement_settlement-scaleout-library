@@ -8,5 +8,5 @@ public interface SiteDbPendingCommandService
 
     Task<bool> UpdatePendingCommandStatus(int pId, int statusId);
 
-    Task<ResultMessage> CheckingPendingCommand(int matchId);
+    Task<ResultMessage> CheckingPendingCommand(int matchId, int siteDbGroupId);
 }

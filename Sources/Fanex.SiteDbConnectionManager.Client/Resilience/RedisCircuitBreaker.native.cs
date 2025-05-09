@@ -6,7 +6,7 @@ public class RedisCircuitBreaker(IConnectionMultiplexer redis)
 {
     private readonly SemaphoreSlim @lock = new(1, 1);
     private bool isOpen;
-    private DateTime lastFailure;
+    private DateTimeOffset lastFailure;
 
     private const int BreakDurationSeconds = 30;
 
@@ -14,7 +14,7 @@ public class RedisCircuitBreaker(IConnectionMultiplexer redis)
     {
         if (isOpen)
         {
-            if (DateTime.UtcNow - lastFailure > TimeSpan.FromSeconds(BreakDurationSeconds))
+            if (DateTimeOffset.UtcNow - lastFailure > TimeSpan.FromSeconds(BreakDurationSeconds))
             {
                 await @lock.WaitAsync();
                 try
@@ -43,7 +43,7 @@ public class RedisCircuitBreaker(IConnectionMultiplexer redis)
             try
             {
                 isOpen = true;
-                lastFailure = DateTime.UtcNow;
+                lastFailure = DateTimeOffset.UtcNow;
             }
             finally
             {

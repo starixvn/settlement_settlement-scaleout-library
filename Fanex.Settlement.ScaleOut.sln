@@ -15,9 +15,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fanex.Settlement.ThirdParty
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Settlement.MessageBridge", "Sources\Fanex.Settlement.MessageBridge\Fanex.Settlement.MessageBridge.csproj", "{FD4D1D98-E64B-494D-8505-373FD74E35F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.SiteDbConnectionManager", "Sources\Fanex.SiteDbConnectionManager.Client\Fanex.SiteDbConnectionManager.Client.csproj", "{0485C9C6-8976-451B-AED6-95BEAD836A34}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.SiteDbConnectionManager.Client", "Sources\Fanex.SiteDbConnectionManager.Client\Fanex.SiteDbConnectionManager.Client.csproj", "{0485C9C6-8976-451B-AED6-95BEAD836A34}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.SiteDbConnectionManager.Services", "Sources\Fanex.SiteDbConnectionManager.Services\Fanex.SiteDbConnectionManager.Services.csproj", "{DE407A8B-2FB2-430C-8CDB-B428F2AD22DE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7FF6E533-9642-4FEE-8D26-480F4F3F4403}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		.gitlab-ci.yml = .gitlab-ci.yml
+		Fanex.Settlement.ScaleOut.sln.DotSettings = Fanex.Settlement.ScaleOut.sln.DotSettings
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -34,7 +34,7 @@ public sealed class SiteDbServiceImp(IConnectionMultiplexer redis) : SiteDbServi
     {
         var sites = await circuitBreaker.ExecuteAsync(async db =>
         {
-            var server = redis.GetServer(redis.GetEndPoints().First());
+            var server = redis.GetServer(redis.GetEndPoints()[0]);
             var keys = server.Keys(pattern: $"{RedisKeyPrefix}*").ToArray();
 
             if (keys.Length == 0 && !LocalCache.IsEmpty)

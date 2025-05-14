@@ -15,6 +15,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fanex.Settlement.ThirdParty
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Settlement.MessageBridge", "Sources\Fanex.Settlement.MessageBridge\Fanex.Settlement.MessageBridge.csproj", "{FD4D1D98-E64B-494D-8505-373FD74E35F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.SiteDbConnectionManager.Client", "Sources\Fanex.SiteDbConnectionManager.Client\Fanex.SiteDbConnectionManager.Client.csproj", "{0485C9C6-8976-451B-AED6-95BEAD836A34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.SiteDbConnectionManager.Services", "Sources\Fanex.SiteDbConnectionManager.Services\Fanex.SiteDbConnectionManager.Services.csproj", "{DE407A8B-2FB2-430C-8CDB-B428F2AD22DE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7FF6E533-9642-4FEE-8D26-480F4F3F4403}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		.gitlab-ci.yml = .gitlab-ci.yml
+		Fanex.Settlement.ScaleOut.sln.DotSettings = Fanex.Settlement.ScaleOut.sln.DotSettings
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +48,14 @@ Global
 		{FD4D1D98-E64B-494D-8505-373FD74E35F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD4D1D98-E64B-494D-8505-373FD74E35F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD4D1D98-E64B-494D-8505-373FD74E35F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0485C9C6-8976-451B-AED6-95BEAD836A34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0485C9C6-8976-451B-AED6-95BEAD836A34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0485C9C6-8976-451B-AED6-95BEAD836A34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0485C9C6-8976-451B-AED6-95BEAD836A34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE407A8B-2FB2-430C-8CDB-B428F2AD22DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE407A8B-2FB2-430C-8CDB-B428F2AD22DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE407A8B-2FB2-430C-8CDB-B428F2AD22DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE407A8B-2FB2-430C-8CDB-B428F2AD22DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +65,8 @@ Global
 		{65C48D32-5311-4023-9370-6B3173D51326} = {ECD184E0-B5B0-4AB1-89AF-B8AC0312C877}
 		{A1D20959-C8E3-41A9-A132-703F095BC5A9} = {ECD184E0-B5B0-4AB1-89AF-B8AC0312C877}
 		{FD4D1D98-E64B-494D-8505-373FD74E35F1} = {ECD184E0-B5B0-4AB1-89AF-B8AC0312C877}
+		{0485C9C6-8976-451B-AED6-95BEAD836A34} = {ECD184E0-B5B0-4AB1-89AF-B8AC0312C877}
+		{DE407A8B-2FB2-430C-8CDB-B428F2AD22DE} = {ECD184E0-B5B0-4AB1-89AF-B8AC0312C877}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1C77B75B-95D9-4212-ABC6-637414BCACC2}

@@ -1,4 +1,6 @@
-﻿namespace Fanex.Settlement.ScaleOut.Services;
+﻿using Fanex.SiteDbConnectionManager.Client.Services;
+
+namespace Fanex.Settlement.ScaleOut.Services;
 
 public interface GeneralService
 {
@@ -7,27 +9,29 @@ public interface GeneralService
     Task<ResultMessage> ExecuteSingle(ExecuteSingleCriteria criteria);
 }
 
-public class GeneralServiceImp(IConfiguration configuration, IDynamicRepository repository)
+public class GeneralServiceImp(
+    IDynamicRepository repository,
+    SiteDbClientService siteDbClientService)
     : GeneralService
 {
     public async Task<ResultMessage> ExecuteAsync(ExecuteCriteria criteria)
     {
-        var servers = configuration.GetSection("SiteDbServer").Get<List<string>>();
-        foreach (var server in servers)
+        var activeSites = await siteDbClientService.GetActiveSiteDbAsync();
+        var tasks = activeSites.Select(async site =>
         {
-            criteria.DbServer = server;
+            criteria.DbServer = site.SiteName;
             await repository.ExecuteAsync(criteria);
-            if (criteria.ErrCode > 0)
+            return new ResultMessage
             {
-                return new ResultMessage
-                {
-                    ErrorCode = criteria.ErrCode,
-                    ErrorMessage = criteria.ErrMsg
-                };
-            }
-        }
+                ErrorCode = criteria.ErrCode,
+                ErrorMessage = criteria.ErrMsg
+            };
+        });
 
-        return new ResultMessage();
+        var results = await Task.WhenAll(tasks);
+        var failedResult = results.ToList().Find(r => r.ErrorCode > 0);
+
+        return failedResult ?? new ResultMessage();
     }
 
     public async Task<ResultMessage> ExecuteSingle(ExecuteSingleCriteria criteria)

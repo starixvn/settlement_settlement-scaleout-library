@@ -14,4 +14,8 @@
     <PackageReference Include="Fanex.Data.Repository" Version="4.3.3" />
     <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fanex.SiteDbConnectionManager.Client\Fanex.SiteDbConnectionManager.Client.csproj" />
+    <ProjectReference Include="..\Fanex.SiteDbConnectionManager.Services\Fanex.SiteDbConnectionManager.Services.csproj" />
+  </ItemGroup>
 </Project>

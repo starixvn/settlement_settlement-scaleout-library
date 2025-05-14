@@ -4,8 +4,6 @@ namespace Fanex.Settlement.ScaleOut.Services;
 
 public interface ScaleOutSettleThirdPartyService
 {
-    Task<ResultMessage> GetDeploymentInfo(GetDeploymentInfoRequest request);
-
     Task UpdateMatchInfo3rd(UpdateMatchInfo3RdRequest request);
 
     Task<ResultMessage> ValidateMoveBetDay(string matchIds, string eventTable, DateTime? eventDate = null);
@@ -21,13 +19,6 @@ public class ScaleOutSettleThirdPartyServiceImp(
     {
         var criteria = mapper.Map<UpdateMatchInfo3RdRequest, UpdateMatchInfo3RdCriteria>(request);
         await repository.ExecuteAsync(criteria);
-    }
-
-    public async Task<ResultMessage> GetDeploymentInfo(GetDeploymentInfoRequest request)
-    {
-        var criteria = new GetDeploymentInfoCriteria { SpName = request.SpName };
-
-        return await generalService.ExecuteAsync(criteria);
     }
 
     public async Task<ResultMessage> ValidateMoveBetDay(string matchIds, string eventTable, DateTime? eventDate = null)

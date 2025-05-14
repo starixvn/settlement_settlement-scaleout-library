@@ -24,19 +24,11 @@ namespace Fanex.Settlement.ScaleOut.Tests.Services
         }
 
         [Fact]
-        public void UpdateMatchInfo3rd_Always_Execute()
+        public async Task UpdateMatchInfo3rd_Always_Execute()
         {
-            service.UpdateMatchInfo3rd(new UpdateMatchInfo3RdRequest());
+            await service.UpdateMatchInfo3rd(new UpdateMatchInfo3RdRequest());
 
-            repository.Received().ExecuteAsync(Arg.Any<UpdateMatchInfo3RdCriteria>());
-        }
-
-        [Fact]
-        public void GetDeploymentInfo_Always_Execute()
-        {
-            service.GetDeploymentInfo(new GetDeploymentInfoRequest());
-
-            generalService.Received().ExecuteAsync(Arg.Any<GetDeploymentInfoCriteria>());
+            await repository.Received().ExecuteAsync(Arg.Any<UpdateMatchInfo3RdCriteria>());
         }
 
         [Fact]

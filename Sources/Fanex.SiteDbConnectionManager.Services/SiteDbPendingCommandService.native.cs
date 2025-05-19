@@ -12,7 +12,7 @@ public class SiteDbPendingCommandServiceImp(IDynamicRepository repository) : Sit
         var criteria = new SavePendingCommandCriteria
         {
             MatchId = command.MatchId,
-            SportType = command.SportType,
+            ProductType = command.ProductType,
             SpName = command.SpName,
             Parameter = command.Parameter,
             Action = command.Action,
@@ -25,11 +25,7 @@ public class SiteDbPendingCommandServiceImp(IDynamicRepository repository) : Sit
 
         await repository.ExecuteAsync(criteria);
 
-        return new ResultMessage
-        {
-            ErrorCode = 0,
-            ErrorMessage = string.Empty
-        };
+        return new ResultMessage();
     }
 
     public async Task<bool> UpdatePendingCommandStatus(int pId, int statusId)

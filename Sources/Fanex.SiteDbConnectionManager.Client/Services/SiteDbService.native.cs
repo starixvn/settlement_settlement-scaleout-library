@@ -17,6 +17,8 @@ public interface SiteDbService
     Task<SiteDb> AddSiteDbAsync(UpdateSiteDbStatus request);
 
     Task<SiteDb> UpdateSiteDbStatusAsync(UpdateSiteDbStatus request);
+
+    Task<bool> RemoveSiteDbAsync(int siteDbGroupId);
 }
 
 /// <summary>
@@ -134,6 +136,15 @@ public sealed class SiteDbServiceImp(IConnectionMultiplexer redis) : SiteDbServi
         await db.StringSetAsync(key, serializedValue);
 
         return siteDb;
+    }
+
+    public async Task<bool> RemoveSiteDbAsync(int siteDbGroupId)
+    {
+        var db = redis.GetDatabase();
+        var key = GetRedisKey(siteDbGroupId);
+
+        var result = await db.KeyDeleteAsync(key);
+        return result;
     }
 
     private static string GetRedisKey(int siteDbGroupId) => $"{RedisKeyPrefix}{siteDbGroupId}";

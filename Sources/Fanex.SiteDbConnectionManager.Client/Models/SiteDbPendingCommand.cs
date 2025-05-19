@@ -6,7 +6,7 @@ public class SiteDbPendingCommand
 
     public int MatchId { get; set; }
 
-    public int SportType { get; set; }
+    public string ProductType { get; set; }
 
     public string SpName { get; set; }
 

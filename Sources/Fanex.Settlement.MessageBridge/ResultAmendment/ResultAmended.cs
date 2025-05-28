@@ -7,4 +7,5 @@ public record class ResultAmended(
     int SportType,
     string Action,
     List<ResourceItem> SelectedResources,
-    List<ResultChanged> ResultsChanged);
+    List<ResultChanged> ResultsChanged,
+    string? Type = null);

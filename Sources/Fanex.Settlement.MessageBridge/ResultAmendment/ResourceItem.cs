@@ -21,6 +21,9 @@ public class ResourceItem
     public string AwayId { get; set; }
 
     [XmlIgnore]
+    public string Action { get; set; }
+
+    [XmlIgnore]
     public string HomeId { get; set; }
 
     [XmlIgnore]

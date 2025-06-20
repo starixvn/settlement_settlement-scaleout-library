@@ -7,16 +7,16 @@ public class ResourceItem
     private string determined = "0";
 
     [XmlAttribute("Id")]
-    public string ResourceId { get; set; }
+    public string ResourceId { get; set; } = string.Empty;
 
     [XmlAttribute("Home")]
-    public string HomeValue { get; set; }
+    public string HomeValue { get; set; } = string.Empty;
 
     [XmlAttribute("Away")]
-    public string AwayValue { get; set; }
+    public string AwayValue { get; set; } = string.Empty;
 
     [XmlAttribute("OtherInfo")]
-    public string OtherInfo { get; set; }
+    public string OtherInfo { get; set; } = string.Empty;
 
     [XmlAttribute("IsDetermined")]
     public string Determined
@@ -29,13 +29,13 @@ public class ResourceItem
     public bool IsSettleDetermined { get; set; }
 
     [XmlIgnore]
-    public string AwayId { get; set; }
+    public string AwayId { get; set; } = string.Empty;
 
     [XmlIgnore]
-    public string HomeId { get; set; }
+    public string HomeId { get; set; } = string.Empty;
 
     [XmlIgnore]
-    public string ResourceName { get; set; }
+    public string ResourceName { get; set; } = string.Empty;
 
     [XmlIgnore]
     public int GroupBetType { get; set; }
